@@ -58,4 +58,6 @@ export const markNotificationRead = (id) => API.put(`/notifications/${id}/read`)
 export const markAllNotificationsRead = () => API.put('/notifications/read/all');
 export const deleteNotification = (id) => API.delete(`/notifications/${id}`);
 
+export const getLeaderboard = () => API.get('/evaluations/leaderboard');
+
 export default API;

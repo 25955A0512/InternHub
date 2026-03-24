@@ -7,20 +7,35 @@ import MentorDashboard from './pages/mentor/MentorDashboard';
 import HRDashboard from './pages/hr/HRDashboard';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import FaceAttendance from './pages/intern/FaceAttendance';
+import GoogleSuccess from './pages/auth/GoogleSuccess';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();
 
   if (loading) return (
-    <div className="min-h-screen flex items-center justify-center">
-      <p className="text-blue-600 text-xl font-semibold">Loading...</p>
+    <div style={{
+      minHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      gap: '14px',
+      background: 'var(--bg)',
+      fontFamily: 'Plus Jakarta Sans, sans-serif'
+    }}>
+      <div className="spinner"></div>
+      <p style={{ color: 'var(--text-muted)', fontSize: '14px', fontWeight: '500' }}>
+        Loading...
+      </p>
     </div>
   );
 
   if (!user) return <Navigate to="/login" />;
+
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     return <Navigate to="/login" />;
   }
+
   return children;
 };
 
@@ -29,35 +44,53 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+
+          {/* Default redirect */}
           <Route path="/" element={<Navigate to="/login" />} />
 
+          {/* Public Routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          {/* Intern Routes */}
           <Route path="/intern/dashboard" element={
             <ProtectedRoute allowedRoles={['intern']}>
               <InternDashboard />
             </ProtectedRoute>
-          }/>
+          } />
           <Route path="/intern/attendance" element={
             <ProtectedRoute allowedRoles={['intern']}>
               <FaceAttendance />
             </ProtectedRoute>
-          }/>
+          } />
+
+          {/* Mentor Routes */}
           <Route path="/mentor/dashboard" element={
             <ProtectedRoute allowedRoles={['mentor']}>
               <MentorDashboard />
             </ProtectedRoute>
-          }/>
+          } />
+
+          {/* HR Routes */}
           <Route path="/hr/dashboard" element={
             <ProtectedRoute allowedRoles={['hr']}>
               <HRDashboard />
             </ProtectedRoute>
-          }/>
+          } />
+
+          {/* Admin Routes */}
           <Route path="/admin/dashboard" element={
             <ProtectedRoute allowedRoles={['admin']}>
               <AdminDashboard />
             </ProtectedRoute>
-          }/>
+          } />
+
+          {/* Catch all — redirect to login */}
+          <Route path="*" element={<Navigate to="/login" />} />
+          
+          <Route path="/auth/google/success" element={<GoogleSuccess />} />
+
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>

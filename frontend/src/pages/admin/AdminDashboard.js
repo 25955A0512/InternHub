@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
 import { LayoutDashboard, Users, UserCheck, BarChart3, CheckCircle, AlertCircle, Clock } from 'lucide-react';
 import { getAllInterns, getAllMentors } from '../../utils/api';
+import Leaderboard from '../shared/Leaderboard';
+import { Trophy } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [interns, setInterns] = useState([]);
@@ -196,6 +198,12 @@ const AdminDashboard = () => {
           </div>
         </div>
       )
+    },
+       {
+      id: 'leaderboard',
+      icon: <Trophy size={15} />,
+      label: 'Leaderboard',
+      content: <Leaderboard />
     }
   ];
 
