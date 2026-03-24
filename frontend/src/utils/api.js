@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Base URL of our backend
 const API = axios.create({
-  baseURL: 'http://localhost:5000/api'
+  baseURL: 'https://internhub-huj2.onrender.com/api'
 });
 
 // Automatically attach token to every request

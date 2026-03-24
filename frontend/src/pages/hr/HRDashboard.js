@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
-import { LayoutDashboard, Users, UserCheck, Award, Search, CheckCircle, AlertCircle, Trophy } from 'lucide-react';
+import { Users, UserCheck, Award, Search, CheckCircle, AlertCircle, Trophy } from 'lucide-react';
 import { getAllInterns, getAllMentors, updateInternStatus, assignMentor, generateCertificate } from '../../utils/api';
 import Leaderboard from '../shared/Leaderboard';
 

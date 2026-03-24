@@ -10,6 +10,7 @@ const FaceRecognition = ({ onVerified, onFailed }) => {
   useEffect(() => {
     loadModelsAndStart();
     return () => stopCamera();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Load AI models from public/models folder

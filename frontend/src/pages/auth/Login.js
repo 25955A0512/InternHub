@@ -183,7 +183,7 @@ const Login = () => {
 
             {/* Google Button */}
             <a
-              href="http://localhost:5000/api/auth/google"
+              href="https://internhub-huj2.onrender.com/api/auth/google"
               style={{
                 display: 'flex',
                 alignItems: 'center',
